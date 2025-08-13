@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,8 +12,14 @@ public class ActionNode : BTNode
 
     public override State Tick()
     {
-        if (routine == null) routine = action();
-        if (routine.MoveNext()) return CurrentState = State.Running;
+        if (routine == null) routine = action?.Invoke();
+
+        if (routine == null)
+            return CurrentState = State.Success;
+
+        if (routine.MoveNext())
+            return CurrentState = State.Running;
+
         routine = null;
         return CurrentState = State.Success;
     }

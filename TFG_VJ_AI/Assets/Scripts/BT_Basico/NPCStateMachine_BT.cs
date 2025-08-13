@@ -14,9 +14,15 @@ namespace BT_Basico
         [SerializeField] private float attackRange = 1f;
         [SerializeField] private float chaseSpeed = 6f;
         [SerializeField] private float attackDuration = 1f;
+
+        [SerializeField] private Material materialObjetivo;
+        [SerializeField] private Material materialDefault;
+
         private int currentWP = 0;
         private NavMeshAgent agent;
         private NPCBehaviorTree bt;
+
+        private int ultimoResaltado = -1;
 
         public Transform[] PatrolPoints => patrolPoints;
         public Transform Player => player;
@@ -50,6 +56,8 @@ namespace BT_Basico
             if (patrolPoints.Length == 0) return;
             agent.isStopped = false;
             agent.SetDestination(patrolPoints[currentWP].position);
+
+            ResaltarSolo(currentWP);
         }
 
         private void LateUpdate()
@@ -58,6 +66,8 @@ namespace BT_Basico
             {
                 currentWP = (currentWP + 1) % patrolPoints.Length;
                 agent.SetDestination(patrolPoints[currentWP].position);
+
+                ResaltarSolo(currentWP);
             }
         }
 
@@ -72,6 +82,20 @@ namespace BT_Basico
         {
             agent.isStopped = true;
             yield return new WaitForSeconds(attackDuration);
+        }
+
+        private void ResaltarSolo(int idxObjetivo)
+        {
+            if (ultimoResaltado >= 0 && ultimoResaltado < patrolPoints.Length)
+            {
+                var rendPrev = patrolPoints[ultimoResaltado]?.GetComponent<Renderer>();
+                if (rendPrev) rendPrev.sharedMaterial = materialDefault;
+            }
+
+            var rend = patrolPoints[idxObjetivo]?.GetComponent<Renderer>();
+            if (rend) rend.sharedMaterial = materialObjetivo;
+
+            ultimoResaltado = idxObjetivo;
         }
     }
 }
