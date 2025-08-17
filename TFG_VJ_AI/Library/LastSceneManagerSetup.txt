@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/BT_SCENES.unity
+- path: Assets/Scenes/GOAP_SCENES.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
