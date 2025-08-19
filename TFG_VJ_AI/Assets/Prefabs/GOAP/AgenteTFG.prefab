@@ -1,0 +1,279 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8738560335395754825
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 389963233900229372}
+  - component: {fileID: 1537838190630480151}
+  - component: {fileID: 919770776418004947}
+  - component: {fileID: 5560430545761386813}
+  - component: {fileID: 7454002556209136734}
+  - component: {fileID: 7813937324239078658}
+  - component: {fileID: 4938355407681027375}
+  - component: {fileID: 4618884484858382371}
+  - component: {fileID: 1334229142850709676}
+  - component: {fileID: 1195019482912407746}
+  - component: {fileID: 5876995562023733382}
+  - component: {fileID: 5201300698510282490}
+  - component: {fileID: 6040554633663480427}
+  - component: {fileID: 6634410206794971144}
+  - component: {fileID: 5150848606697420378}
+  m_Layer: 0
+  m_Name: AgenteTFG
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &389963233900229372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1537838190630480151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49867384761509e409b1e94ba03b4bcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &919770776418004947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4c9b223ef183c429d9bde71e10a931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  world: {fileID: 1537838190630480151}
+  goals:
+  - {fileID: 11400000, guid: 1172eb8a8b4204548b21d7c5a9bf5675, type: 2}
+  - {fileID: 11400000, guid: cf01ed9b472acdc4cbcb300bc8cd2274, type: 2}
+  - {fileID: 11400000, guid: d843632132049b64785b22be376da615, type: 2}
+  - {fileID: 11400000, guid: d20e22d7ed9a87949af7123be7ecae5f, type: 2}
+  - {fileID: 11400000, guid: fd8399c09ac06974eb8b2392e86652c0, type: 2}
+  - {fileID: 11400000, guid: fa677ecd7d411b540bd7f533fcd4f081, type: 2}
+  currentGoal: (none)
+  currentPlanKeys: []
+  replanCooldown: 0.5
+--- !u!114 &5560430545761386813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4097175c6cdcadf42ab5f4f5a7fc4e96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A1
+  tiempoMinMaxMin: {x: 10, y: 20}
+  deltaEnergia: -20
+  deltaEstres: 10
+--- !u!114 &7454002556209136734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d79aa2ea11b15a4ba87b7ad0f41529a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A2
+  tiempoMinMaxMin: {x: 5, y: 10}
+  deltaEnergia: -15
+  deltaEstres: 0
+--- !u!114 &7813937324239078658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c3ffcd58286bab4594c88c186fc728d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A3
+  tiempoMinMaxMin: {x: 20, y: 30}
+  deltaEnergia: -15
+  deltaEstres: 0
+--- !u!114 &4938355407681027375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864d5234ad232244ca478fb49d6fe840, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A4
+  tiempoMinMaxMin: {x: 5, y: 15}
+  deltaEnergia: -10
+  deltaEstres: 0
+--- !u!114 &4618884484858382371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ed1c8cb71ddf746b02c430def764ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A5
+  tiempoMinMaxMin: {x: 10, y: 15}
+  deltaEnergia: -10
+  deltaEstres: 0
+--- !u!114 &1334229142850709676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a321d1fc0e8c745428478eb6153945c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A6
+  tiempoMinMaxMin: {x: 20, y: 25}
+  deltaEnergia: -20
+  deltaEstres: 5
+--- !u!114 &1195019482912407746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33be97e569ea2824da67ceb6380d7a70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A7
+  tiempoMinMaxMin: {x: 15, y: 20}
+  deltaEnergia: -5
+  deltaEstres: 0
+--- !u!114 &5876995562023733382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ead9a76abbf6b043a4c79764cfdac62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A8
+  tiempoMinMaxMin: {x: 5, y: 10}
+  deltaEnergia: -15
+  deltaEstres: 0
+--- !u!114 &5201300698510282490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2184ecf0ae8e053409835fc1fceae74b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A9
+  tiempoMinMaxMin: {x: 15, y: 20}
+  deltaEnergia: 20
+  deltaEstres: -15
+--- !u!114 &6040554633663480427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c69f7a8d7f43d44a85ec15ef12c4bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A10
+  tiempoMinMaxMin: {x: 20, y: 30}
+  deltaEnergia: -2
+  deltaEstres: -10
+--- !u!114 &6634410206794971144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d53a7ceed23a91842aefa87de8ba66f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionKey: A11
+  tiempoMinMaxMin: {x: 20, y: 30}
+  deltaEnergia: -5
+  deltaEstres: 0
+--- !u!114 &5150848606697420378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8738560335395754825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e86bec5aeb31e554f85d2e81152d6872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  world: {fileID: 1537838190630480151}
+  agent: {fileID: 919770776418004947}
+  sEnergia: {fileID: 0}
+  sEstres: {fileID: 0}
+  sTiempo: {fileID: 0}
+  tGoal: {fileID: 0}
+  tPlan: {fileID: 0}
+  energiaFill: {fileID: 0}
+  estresFill: {fileID: 0}
