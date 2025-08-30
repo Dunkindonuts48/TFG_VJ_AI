@@ -1,0 +1,237 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1764077382140486053
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4075523618717279495}
+  - component: {fileID: 2160266465162219828}
+  - component: {fileID: 5564520191498961564}
+  - component: {fileID: 292347448021706416}
+  - component: {fileID: 8846003112517218576}
+  - component: {fileID: 174147344909541901}
+  - component: {fileID: 526229453019657518}
+  - component: {fileID: 1637134368305570968}
+  - component: {fileID: 6025345477431435345}
+  - component: {fileID: 7749044270367395960}
+  - component: {fileID: 983840987092696039}
+  - component: {fileID: 9008367197606587508}
+  m_Layer: 0
+  m_Name: Agente
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4075523618717279495
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2160266465162219828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63be22c9cb8f45f44af40735547a4b65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energiaInicial: 100
+  estresInicial: 10
+  goalFlagKey: tfg_presentado
+--- !u!114 &5564520191498961564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17a490a3f844ed94aa294139aca860d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 10
+  stressGain: 6
+  effectFlagKey: bibliografia_actualizada
+  effectValue: 1
+  preconditions:
+  - reunion_tras_cap6
+--- !u!114 &292347448021706416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 145a2a77ca4e8784e9c2a7b53a3f5f6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 15
+  stressGain: 7
+  effectFlagKey: cap5_redactado
+  effectValue: 1
+  preconditions: []
+--- !u!114 &8846003112517218576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93f53efe5a26423478518863acaea094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: -30
+  stressGain: -6
+  effectFlagKey: 
+  effectValue: 1
+  preconditions: []
+--- !u!114 &174147344909541901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1d0ea0406b2e9147b48822968f09b1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 8
+  stressGain: 5
+  effectFlagKey: cap5_entregado
+  effectValue: 1
+  preconditions:
+  - cap5_redactado
+--- !u!114 &526229453019657518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4231d52eb84dc9f4394c4401d42d6ab8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 6
+  stressGain: 4
+  effectFlagKey: reunion_tras_cap5
+  effectValue: 1
+  preconditions:
+  - cap5_entregado
+--- !u!114 &1637134368305570968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5552aa1d20ff51e428e52b07a744cd4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 16
+  stressGain: 8
+  effectFlagKey: cap6_redactado
+  effectValue: 1
+  preconditions:
+  - reunion_tras_cap5
+--- !u!114 &6025345477431435345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57b40e2d36abf5c4ebfd8420b3e0c880, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 6
+  stressGain: 4
+  effectFlagKey: reunion_tras_cap6
+  effectValue: 1
+  preconditions:
+  - cap6_entregado
+--- !u!114 &7749044270367395960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ebb6c72897e95d45a75c2d4c7e53adb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 8
+  stressGain: 5
+  effectFlagKey: cap6_entregado
+  effectValue: 1
+  preconditions:
+  - cap6_redactado
+--- !u!114 &983840987092696039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7458683d7ef8c54ba8e09f7d6351094, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 18
+  stressGain: 9
+  effectFlagKey: defensa_preparada
+  effectValue: 1
+  preconditions:
+  - bibliografia_actualizada
+--- !u!114 &9008367197606587508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1764077382140486053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84a3c4bb9de1e5a4faea1c94fb7d3c2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  energyCost: 25
+  stressGain: 12
+  effectFlagKey: tfg_presentado
+  effectValue: 1
+  preconditions:
+  - defensa_preparada
