@@ -21,7 +21,7 @@ namespace TFG.Memory
                 var dto = new MemDTO { items = all.ToArray() };
                 var json = JsonUtility.ToJson(dto, true);
                 File.WriteAllText(FilePath(fileName), json);
-                Debug.Log($"[MemPersistence] Guardado {all.Count} → {FilePath(fileName)}");
+                //Debug.Log($"[MemPersistence] Guardado {all.Count} → {FilePath(fileName)}");
             }
             catch (Exception e)
             {

@@ -16,8 +16,8 @@ TagManager:
   - Walkable
   - Player
   - Objective
-  - 
-  - 
+  - Enemy
+  - NPC
   - 
   - 
   - 

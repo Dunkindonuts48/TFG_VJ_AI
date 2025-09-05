@@ -193,7 +193,7 @@ MonoBehaviour:
   wRecency: 0.25
   wImportance: 0.2
   wFrequency: 0.1
-  fileName: memories.json
+  fileName: GOAP.json
   loadOnAwake: 1
   autoSave: 1
   autosaveEverySeconds: 5

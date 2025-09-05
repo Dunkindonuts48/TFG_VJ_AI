@@ -30,6 +30,9 @@ namespace TFG.GOAP
         public bool Get(string key) => flags.TryGetValue(key, out var v) && v;
         public void Set(string key, bool value) => flags[key] = value;
 
+        public bool Get(string key, bool x) => flags.TryGetValue(key, out var v) && v;
+        public void Set(string key, bool value, float v) => flags[key] = value;
+
         public void SpendEnergy(float amount) => Energia = UnityEngine.Mathf.Max(0f, Energia - amount);
         public void AddStress(float amount) => Estres = UnityEngine.Mathf.Max(0f, Estres + amount);
 
