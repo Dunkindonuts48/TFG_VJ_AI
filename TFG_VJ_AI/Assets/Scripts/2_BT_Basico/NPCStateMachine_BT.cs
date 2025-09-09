@@ -14,16 +14,13 @@ namespace BT_Basico
         [SerializeField] private float attackRange = 1f;
         [SerializeField] private float chaseSpeed = 6f;
         [SerializeField] private float attackDuration = 1f;
-
         [SerializeField] private Material materialObjetivo;
         [SerializeField] private Material materialDefault;
 
         private int currentWP = 0;
         private NavMeshAgent agent;
         private NPCBehaviorTree bt;
-
         private int ultimoResaltado = -1;
-
         public Transform[] PatrolPoints => patrolPoints;
         public Transform Player => player;
         public float DetectionRange => detectionRange;

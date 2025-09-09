@@ -6,14 +6,9 @@ namespace TFG.NPC
 {
     public class HybridMemoryDrivenAI : MonoBehaviour
     {
-        [Header("Refs")]
         public MemoryIntentBridge intent;
         public CombatMovement movement;
-
-        [Header("WorldState (GOAP)")]
         public WorldState world;
-
-        [Header("Control")]
         public bool driveWithBT = true;
 
         void Awake()
@@ -64,8 +59,7 @@ namespace TFG.NPC
 
         public async Task<string> ReceivePlayerTextAsync(string text)
         {
-            return (intent != null) ? await intent.OnPlayerUtteranceAsync(text) : null;
+            return (intent != null) ? await intent.OnPlayerStatementAsync(text) : null;
         }
-
     }
 }

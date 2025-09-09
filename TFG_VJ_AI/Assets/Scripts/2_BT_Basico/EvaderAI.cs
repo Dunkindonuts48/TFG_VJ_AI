@@ -336,7 +336,6 @@ namespace BT_Basico
 
         public void SetWaypoints(Transform[] wps) => waypoints = wps;
         public void SetThreat(Transform t) => threat = t;
-
         private void ResaltarSolo(int idxObjetivo)
         {
             if (waypoints == null || waypoints.Length == 0) return;

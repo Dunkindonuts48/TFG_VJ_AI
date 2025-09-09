@@ -8,15 +8,14 @@ using UnityEngine.Networking;
 
 namespace TFG.Memory
 {
-    [Serializable] class EmbReq { public string model; public string input; }
-    [Serializable] class EmbRes { public float[][] embeddings; }
-
-    [Serializable] class GenReq { public string model; public string prompt; public bool stream = false; }
-    [Serializable] class GenRes { public string response; }
+    [Serializable] class EmbReq {public string model; public string input;}
+    [Serializable] class EmbRes {public float[][] embeddings;}
+    [Serializable] class GenReq { public string model; public string prompt; public bool stream = false;}
+    [Serializable] class GenRes { public string response;}
 
     public static class OllamaClient
     {
-        const string Base = "http://localhost:11434";
+        const string ollamaHost = "http://localhost:11434";
 
         static async Task<string> PostJson(string url, string json)
         {
@@ -39,7 +38,7 @@ namespace TFG.Memory
         public static async Task<float[]> EmbedAsync(string text, string model = "mxbai-embed-large")
         {
             var json = JsonUtility.ToJson(new EmbReq { model = model, input = text });
-            var res = await PostJson($"{Base}/api/embeddings", json);
+            var res = await PostJson($"{ollamaHost}/api/embeddings", json);
             var data = JsonUtility.FromJson<EmbRes>(res);
             return (data != null && data.embeddings != null && data.embeddings.Length > 0) ? data.embeddings[0] : Array.Empty<float>();
         }
@@ -47,7 +46,7 @@ namespace TFG.Memory
         public static async Task<string> GenerateAsync(string prompt, string model = "mistral:7b-instruct")
         {
             var json = JsonUtility.ToJson(new GenReq { model = model, prompt = prompt, stream = false });
-            var res = await PostJson($"{Base}/api/generate", json);
+            var res = await PostJson($"{ollamaHost}/api/generate", json);
             var data = JsonUtility.FromJson<GenRes>(res);
             return data != null ? data.response : "";
         }

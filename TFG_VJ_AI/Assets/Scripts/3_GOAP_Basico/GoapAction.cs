@@ -6,19 +6,13 @@ namespace TFG.GOAP
 {
     public abstract class GoapAction : MonoBehaviour
     {
-        [Header("Costes base")]
         [SerializeField] public float energyCost = 10f;
         [SerializeField] protected float stressGain = 5f;
-
-        [Header("Efecto principal")]
         [SerializeField] protected string effectFlagKey = "";
         [SerializeField] protected bool effectValue = true;
-
-        [Header("Precondiciones (todas deben cumplirse)")]
         [SerializeField] protected List<string> preconditions = new();
 
         public string ActionName => name;
-
         public IReadOnlyList<string> Preconditions => preconditions;
         public string EffectKey => effectFlagKey;
         public bool EffectValue => effectValue;

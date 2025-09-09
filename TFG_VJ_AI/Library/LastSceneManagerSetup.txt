@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/4_MemoryRepository.unity
+- path: Assets/Scenes/5_AI_Final_SCENES.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0

@@ -7,17 +7,12 @@ namespace TFG.NPC
 {
     public class MemoryIntentBridge : MonoBehaviour
     {
-        [Header("Refs")]
         public MemoryRepository memory;
         public LLMGateway gateway;
         public SocialBlackboard bb = new SocialBlackboard();
-
-        [Header("Chat (opcional)")]
         public DialogueAgent agent;
         public bool chatWhenCommand = true;
         public bool chatWhenNoCommand = true;
-
-        [Header("Log")]
         public bool verbose = true;
 
         void Awake()
@@ -26,9 +21,9 @@ namespace TFG.NPC
             if (!agent) agent = FindObjectOfType<DialogueAgent>();
         }
 
-        public void OnPlayerUtterance(string text) => _ = OnPlayerUtteranceAsync(text);
+        public void OnPlayerStatement(string text) => _ = OnPlayerStatementAsync(text);
 
-        public async Task<string> OnPlayerUtteranceAsync(string text)
+        public async Task<string> OnPlayerStatementAsync(string text)
         {
             var intent = (gateway != null)
                 ? await gateway.ClassifyIntentAsync(text)

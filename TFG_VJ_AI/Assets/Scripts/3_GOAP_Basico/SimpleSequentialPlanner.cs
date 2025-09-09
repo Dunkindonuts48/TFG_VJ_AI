@@ -28,7 +28,7 @@ namespace TFG.GOAP
 
             if (!sim.Get(goalFlagKey))
             {
-                Debug.LogWarning("[Planner] No se alcanzó la meta. Revisa precondiciones/energía.");
+                Debug.LogWarning("[Planner] No se alcanzó la meta. LA HE CAGADO EN ALGUNA PRECONDICION");
                 return new List<GoapAction>();
             }
 
@@ -36,4 +36,3 @@ namespace TFG.GOAP
         }
     }
 }
-

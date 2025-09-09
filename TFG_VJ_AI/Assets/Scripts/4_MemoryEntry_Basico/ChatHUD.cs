@@ -8,7 +8,6 @@ namespace TFG.Memory
 {
     public class ChatHUD : MonoBehaviour
     {
-        [Header("Refs")]
         public DialogueAgent agent;
         public TMP_InputField input;
         public TMP_Text lastExchangeText;

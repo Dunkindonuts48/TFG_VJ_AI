@@ -8,7 +8,6 @@ namespace TFG.GOAP
     {
         public const string Energia = "energia";
         public const string Estres = "estres";
-
         public const string Cap5_Redactado = "cap5_redactado";
         public const string Cap5_Entregado = "cap5_entregado";
         public const string Reunion_TrasCap5 = "reunion_tras_cap5";

@@ -6,17 +6,13 @@ namespace TFG.GOAP
 {
     public class GoapAgent : MonoBehaviour
     {
-        [Header("Estado inicial")]
         public float energiaInicial = 100f;
         public float estresInicial = 10f;
-
-        [Header("Objetivo")]
         public string goalFlagKey = WSKeys.TFG_Presentado;
 
         private WorldState world;
         private List<GoapAction> actions;
         private SimpleSequentialPlanner planner;
-
         private Queue<GoapAction> currentPlan = new();
 
         void Awake()
@@ -25,8 +21,6 @@ namespace TFG.GOAP
             planner = new SimpleSequentialPlanner();
             actions = new List<GoapAction>(GetComponents<GoapAction>());
         }
-
-        [ContextMenu("Plan & Execute")]
         public void PlanAndExecute()
         {
             var plan = planner.Plan(world, actions, goalFlagKey);
@@ -41,7 +35,6 @@ namespace TFG.GOAP
             StopAllCoroutines();
             StartCoroutine(ExecutePlan());
         }
-
 
         private IEnumerator ExecutePlan()
         {
@@ -100,7 +93,7 @@ namespace TFG.GOAP
             OnPlanCompleted?.Invoke();
 
             if (world.Get(goalFlagKey))
-                Debug.Log($"[Agent] ¡Meta alcanzada! {goalFlagKey}=true");
+                Debug.Log($"[Agent] Meta alcanzada {goalFlagKey}=true");
             else
                 Debug.LogWarning("[Agent] Plan ejecutado pero la meta no se alcanzó.");
         }
@@ -115,7 +108,6 @@ namespace TFG.GOAP
         public float EstresActual => world != null ? world.Estres : 0f;
         public bool ObjetivoCumplido => world != null && world.Get(goalFlagKey);
         public string ObjetivoKey => goalFlagKey;
-
         public System.Action<string> OnActionStarted;
         public System.Action<string> OnActionFinished;
         public System.Action OnPlanBuilt;
@@ -124,6 +116,5 @@ namespace TFG.GOAP
         public int PlanTotalCount { get; private set; } = 0;
         public int PlanDoneCount { get; private set; } = 0;
         public List<string> PlannedActionNames { get; private set; } = new List<string>();
-
     }
 }

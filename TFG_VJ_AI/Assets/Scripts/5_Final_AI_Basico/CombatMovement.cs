@@ -11,8 +11,6 @@ public class CombatMovement : MonoBehaviour
     public float enemyScanRadius = 8f;
     public LayerMask enemyMask;
     public float attackRange = 2.0f;
-
-    [Header("Debug")]
     public Transform currentEnemy;
 
     void Reset()

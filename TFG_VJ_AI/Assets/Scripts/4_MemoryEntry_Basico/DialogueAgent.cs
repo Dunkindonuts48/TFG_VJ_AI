@@ -10,28 +10,21 @@ namespace TFG.Memory
 {
     public class DialogueAgent : MonoBehaviour
     {
-        [Header("Refs")]
         public MemoryRepository memory;
-        [Header("LLM")]
         [TextArea(3, 6)]
-        public string systemPersona =
-            "Eres un NPC amable y coherente con sus recuerdos. Contestas en 1-3 frases.";
+        public string systemPersona = "Eres un NPC amable y coherente con sus recuerdos. Contestas en 1-3 frases.";
         public string llmModel = "mistral:7b-instruct";
         public string embModel = "mxbai-embed-large";
         public bool useEmbeddings = false;
-        [Header("Memoria")]
         public int shortTermMaxTurns = 8;
         public int recallTopK = 5;
         public int summarizeEveryNTurns = 8;
-        readonly List<(string role, string text)> _shortTerm = new();
-        int _turnsSinceSummary = 0;
 
-        public int ShortTermPairs => _shortTerm.Count / 2;
-        public int LongTermSummariesCount =>
-            memory?.AllReadOnly?.Count(r =>
-                r.type == MemoryType.Semantic &&
-                r.tags != null &&
-                r.tags.Any(t => t.Equals("resumen", StringComparison.OrdinalIgnoreCase))) ?? 0;
+        readonly List<(string role, string text)> shortTerm = new();
+        int turnsSinceSummary = 0;
+
+        public int ShortTermPairs => shortTerm.Count / 2;
+        public int LongTermSummariesCount => memory?.AllReadOnly?.Count(r => r.type == MemoryType.Semantic &&  r.tags != null && r.tags.Any(t => t.Equals("resumen", StringComparison.OrdinalIgnoreCase))) ?? 0;
         public int TotalMemories => memory?.AllReadOnly?.Count ?? 0;
 
         void Awake()
@@ -51,7 +44,7 @@ namespace TFG.Memory
             }
             var top = memory.Recall(new[] { "lore", "historia", "jugador", "dialogo" }, qEmb, recallTopK);
 
-            var prompt = Prompts.ChatPrompt(systemPersona, _shortTerm, top, userText);
+            var prompt = Prompts.ChatPrompt(systemPersona, shortTerm, top, userText);
 
             string reply;
             try
@@ -64,9 +57,9 @@ namespace TFG.Memory
                 return "Ahora mismo no puedo responder.";
             }
             reply = Clean(reply);
-            _shortTerm.Add(("Usuario", userText));
-            _shortTerm.Add(("Asistente", reply));
-            while (_shortTerm.Count > shortTermMaxTurns * 2) _shortTerm.RemoveRange(0, 2);
+            shortTerm.Add(("Usuario", userText));
+            shortTerm.Add(("Asistente", reply));
+            while (shortTerm.Count > shortTermMaxTurns * 2) shortTerm.RemoveRange(0, 2);
 
             memory.Remember(new MemoryRecord
             {
@@ -78,10 +71,10 @@ namespace TFG.Memory
                 importance = 0.5f,
                 occurrences = 1
             });
-            _turnsSinceSummary++;
-            if (_turnsSinceSummary >= summarizeEveryNTurns)
+            turnsSinceSummary++;
+            if (turnsSinceSummary >= summarizeEveryNTurns)
             {
-                var transcript = string.Join("\n", _shortTerm.ConvertAll(t => $"{t.role}: {t.text}"));
+                var transcript = string.Join("\n", shortTerm.ConvertAll(t => $"{t.role}: {t.text}"));
                 var sumPrompt = Prompts.SummarizeTurnsPrompt(transcript);
                 try
                 {
@@ -99,7 +92,7 @@ namespace TFG.Memory
                     });
                 }
                 catch { }
-                _turnsSinceSummary = 0;
+                turnsSinceSummary = 0;
             }
 
             return reply;

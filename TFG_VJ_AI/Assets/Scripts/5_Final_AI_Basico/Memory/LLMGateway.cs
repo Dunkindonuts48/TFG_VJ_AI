@@ -8,8 +8,6 @@ using UnityEngine;
 public class LLMGateway
 {
     public TFG.Memory.MemoryRepository repo;
-
-    [Header("Ollama")]
     public bool useOllama = true;
     public string ollamaHost = "http://127.0.0.1:11434";
     public string model = "llama3.1:8b-instruct";
@@ -28,8 +26,8 @@ public class LLMGateway
                 "Eres un clasificador de intenciones para un NPC en un videojuego. " +
                 "Devuelve SOLO: FollowMe | StopFollow | AttackPlayer | Apologize | None.\n" +
                 "La frase puede venir en español o inglés.\n" +
-                "Criterios: FollowMe ('sígueme','follow me'), StopFollow ('para de seguir'), " +
-                "AttackPlayer (hostilidad explícita del jugador contra el NPC), Apologize ('perdón','sorry').\n\n" +
+                "Criterios: FollowMe (pedir que el NPC siga al jugador, 'sígueme','follow me'), StopFollow (pedir que el NPC que deje de seguir al jugador, 'para de seguir'), " +
+                "AttackPlayer (hostilidad explícita del jugador contra el NPC), Apologize (`Disculpa`, 'sorry', Disculpas o arrepentimiento por parte del jugador contra el NPC).\n\n" +
                 "Frase: '" + raw + "'\nEtiqueta:";
 
             string outText = null;
@@ -39,12 +37,10 @@ public class LLMGateway
             else
                 outText = SafeAskLLM(prompt);
 
-            if (!string.IsNullOrEmpty(outText) &&
-                Enum.TryParse<SocialIntent>(outText.Trim(), true, out var intentLLM))
+            if (!string.IsNullOrEmpty(outText) && Enum.TryParse<SocialIntent>(outText.Trim(), true, out var intentLLM))
                 return intentLLM;
         }
         catch {}
-
         return ClassifyIntent(raw);
     }
 

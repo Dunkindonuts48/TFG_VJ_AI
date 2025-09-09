@@ -11,8 +11,7 @@ namespace TFG.Memory
 
     public static class MemPersistence
     {
-        static string FilePath(string fileName) =>
-            Path.Combine(Application.persistentDataPath, fileName);
+        static string FilePath(string fileName) => Path.Combine(Application.persistentDataPath, fileName);
 
         public static void Save(string fileName, List<MemoryRecord> all)
         {

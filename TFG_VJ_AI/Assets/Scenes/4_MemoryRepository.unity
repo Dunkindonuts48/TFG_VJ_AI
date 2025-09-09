@@ -470,6 +470,14 @@ PrefabInstance:
       propertyPath: agent
       value: 
       objectReference: {fileID: 552228545}
+    - target: {fileID: 5011018753171666021, guid: 7fbe377f313cab440956bd1754246f5b, type: 3}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5011018753171666021, guid: 7fbe377f313cab440956bd1754246f5b, type: 3}
+      propertyPath: m_fontSize
+      value: 36
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

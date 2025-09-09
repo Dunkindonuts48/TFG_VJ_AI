@@ -9,18 +9,15 @@ namespace TFG.Memory
 {
     public class MemoryRepository : MonoBehaviour
     {
-        [Header("Scoring")]
         [Range(0, 1)] public float wSimilarity = 0.45f, wRecency = 0.25f, wImportance = 0.20f, wFrequency = 0.10f;
-
-        [Header("Persistencia")]
         public string fileName = "memories.json";
         public bool loadOnAwake = true;
         public bool autoSave = true;
         public float autosaveEverySeconds = 10f;
         public event Action OnChanged;
 
-        readonly List<MemoryRecord> _all = new List<MemoryRecord>();
-        public IReadOnlyList<MemoryRecord> AllReadOnly => _all;
+        readonly List<MemoryRecord> all = new List<MemoryRecord>();
+        public IReadOnlyList<MemoryRecord> AllReadOnly => all;
 
         float _t;
 
@@ -29,8 +26,8 @@ namespace TFG.Memory
             if (loadOnAwake)
             {
                 var loaded = MemPersistence.Load(fileName);
-                _all.Clear(); _all.AddRange(loaded);
-                Debug.Log($"[MemoryRepository] Cargadas: {_all.Count}. Ruta: {MemPersistence.GetAbsolutePath(fileName)}");
+                all.Clear(); all.AddRange(loaded);
+                Debug.Log($"[MemoryRepository] Cargadas: {all.Count}. Ruta: {MemPersistence.GetAbsolutePath(fileName)}");
             }
         }
 
@@ -46,19 +43,19 @@ namespace TFG.Memory
 
         public void SaveNow()
         {
-            MemPersistence.Save(fileName, _all);
+            MemPersistence.Save(fileName, all);
         }
         public void Remember(MemoryRecord r) {
-            _all.Add(r); OnChanged?.Invoke(); 
+            all.Add(r); OnChanged?.Invoke(); 
         }
         public void UpdateRecord(int index, MemoryRecord r) {
-            if (index >= 0 && index < _all.Count) { _all[index] = r; OnChanged?.Invoke(); }
+            if (index >= 0 && index < all.Count) { all[index] = r; OnChanged?.Invoke(); }
         }
         public void RemoveAt(int index) {
-            if (index >= 0 && index < _all.Count) { _all.RemoveAt(index); OnChanged?.Invoke(); }
+            if (index >= 0 && index < all.Count) { all.RemoveAt(index); OnChanged?.Invoke(); }
         }
         public void ClearAll() {
-            _all.Clear(); 
+            all.Clear(); 
         }
         float Cosine(float[] a, float[] b)
         {
@@ -96,7 +93,7 @@ namespace TFG.Memory
         }
         public List<MemoryRecord> Recall(string[] queryTags, float[] emb, int k = 5)
         {
-            return _all.OrderByDescending(r => Score(r, queryTags, emb)).Take(Mathf.Max(1, k)).ToList();
+            return all.OrderByDescending(r => Score(r, queryTags, emb)).Take(Mathf.Max(1, k)).ToList();
         }
     }
 }

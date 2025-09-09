@@ -12,15 +12,15 @@ namespace TFG.Memory
         public MemoryRepository repo;
         public KeyCode toggleKey = KeyCode.F2;
         public bool visible = true;
-        Vector2 _scroll;
-        Vector2 _contentScroll;
-        int _selected = -1;
-        MemoryRecord _edit;
+        Vector2 scroll;
+        Vector2 contentScroll;
+        int selected = -1;
+        MemoryRecord edit;
 
         void Awake()
         {
             if (!repo) repo = GetComponent<MemoryRepository>();
-            if (repo) repo.OnChanged += () => { if (_selected >= repo.AllReadOnly.Count) Select(-1); };
+            if (repo) repo.OnChanged += () => { if (selected >= repo.AllReadOnly.Count) Select(-1); };
         }
 
         void Update()
@@ -30,11 +30,11 @@ namespace TFG.Memory
 
         void Select(int idx)
         {
-            _selected = idx;
-            if (_selected >= 0 && _selected < repo.AllReadOnly.Count)
+            selected = idx;
+            if (selected >= 0 && selected < repo.AllReadOnly.Count)
             {
-                var src = repo.AllReadOnly[_selected];
-                _edit = new MemoryRecord
+                var src = repo.AllReadOnly[selected];
+                edit = new MemoryRecord
                 {
                     id = src.id,
                     type = src.type,
@@ -46,7 +46,7 @@ namespace TFG.Memory
                     embedding = src.embedding
                 };
             }
-            else _edit = null;
+            else edit = null;
         }
 
         void OnGUI()
@@ -87,81 +87,75 @@ namespace TFG.Memory
             }
             using (new GUILayout.HorizontalScope())
             {
-                GUI.enabled = (_selected >= 0);
+                GUI.enabled = (selected >= 0);
                 if (GUILayout.Button("Borrar seleccionado"))
                 {
-                    repo.RemoveAt(_selected);
+                    repo.RemoveAt(selected);
                     Select(-1);
                 }
                 GUI.enabled = true;
             }
             GUILayout.EndHorizontal();
-
             GUILayout.Space(6);
-
             GUILayout.BeginHorizontal();
-
             GUILayout.BeginVertical(GUILayout.Width(230));
-            _scroll = GUILayout.BeginScrollView(_scroll, "box", GUILayout.Height(h - 120));
+            scroll = GUILayout.BeginScrollView(scroll, "box", GUILayout.Height(h - 120));
             for (int i = 0; i < repo.AllReadOnly.Count; i++)
             {
                 var r = repo.AllReadOnly[i];
                 var label = $"{i:00} | {r.type} | {(r.content.Length > 24 ? r.content.Substring(0, 24) + "…" : r.content)}";
                 var prev = GUI.color;
-                if (i == _selected) GUI.color = Color.cyan;
+                if (i == selected) GUI.color = Color.cyan;
                 if (GUILayout.Button(label, GUILayout.ExpandWidth(true))) Select(i);
                 GUI.color = prev;
             }
             GUILayout.EndScrollView();
             GUILayout.EndVertical();
-
             GUILayout.BeginVertical("box", GUILayout.ExpandWidth(true), GUILayout.Height(h - 120));
-            if (_edit != null)
+            if (edit != null)
             {
-                GUILayout.Label($"ID: {_edit.id}");
+                GUILayout.Label($"ID: {edit.id}");
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Tipo:", GUILayout.Width(60));
                 var types = Enum.GetNames(typeof(MemoryType));
-                int idx = Array.IndexOf(types, _edit.type.ToString());
+                int idx = Array.IndexOf(types, edit.type.ToString());
                 idx = PopupRow(idx, types);
-                _edit.type = (MemoryType)Enum.Parse(typeof(MemoryType), types[Mathf.Clamp(idx, 0, types.Length - 1)]);
+                edit.type = (MemoryType)Enum.Parse(typeof(MemoryType), types[Mathf.Clamp(idx, 0, types.Length - 1)]);
                 GUILayout.EndHorizontal();
 
-                GUILayout.Label($"Contenido  ({_edit.content?.Length ?? 0} chars):");
+                GUILayout.Label($"Contenido  ({edit.content?.Length ?? 0} chars):");
                 GUI.SetNextControlName("CONTENT_TEXTAREA");
-                _contentScroll = GUILayout.BeginScrollView(_contentScroll, "box", GUILayout.MinHeight(180), GUILayout.MaxHeight(Mathf.Max(180, Screen.height - 260)), GUILayout.ExpandHeight(true));
-                _edit.content = GUILayout.TextArea(_edit.content, GUILayout.ExpandHeight(true));
+                contentScroll = GUILayout.BeginScrollView(contentScroll, "box", GUILayout.MinHeight(180), GUILayout.MaxHeight(Mathf.Max(180, Screen.height - 260)), GUILayout.ExpandHeight(true));
+                edit.content = GUILayout.TextArea(edit.content, GUILayout.ExpandHeight(true));
                 GUILayout.EndScrollView();
 
                 if (Event.current.type == EventType.MouseDown) FocusControlSafe();
 
                 GUILayout.Label("Tags (coma-separados):");
-                var tagsStr = string.Join(",", _edit.tags ?? Array.Empty<string>());
+                var tagsStr = string.Join(",", edit.tags ?? Array.Empty<string>());
                 tagsStr = GUILayout.TextField(tagsStr);
-                _edit.tags = string.IsNullOrWhiteSpace(tagsStr)
+                edit.tags = string.IsNullOrWhiteSpace(tagsStr)
                     ? Array.Empty<string>()
                     : tagsStr.Split(',').Select(t => t.Trim()).Where(t => t.Length > 0).ToArray();
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Fecha (UTC ISO):", GUILayout.Width(110));
-                var tsIso = _edit.timestamp.ToUniversalTime().ToString("o");
+                var tsIso = edit.timestamp.ToUniversalTime().ToString("o");
                 var newIso = GUILayout.TextField(tsIso);
                 if (newIso != tsIso && DateTime.TryParse(newIso, null, System.Globalization.DateTimeStyles.AdjustToUniversal, out var ts))
-                    _edit.timestamp = ts;
+                    edit.timestamp = ts;
                 GUILayout.EndHorizontal();
-
                 GUILayout.BeginHorizontal();
-                GUILayout.Label($"Importance: {_edit.importance:0.00}", GUILayout.Width(120));
-                _edit.importance = GUILayout.HorizontalSlider(_edit.importance, 0f, 1f);
+                GUILayout.Label($"Importance: {edit.importance:0.00}", GUILayout.Width(120));
+                edit.importance = GUILayout.HorizontalSlider(edit.importance, 0f, 1f);
                 GUILayout.Label($"Occur:", GUILayout.Width(52));
-                var occStr = GUILayout.TextField(_edit.occurrences.ToString(), GUILayout.Width(40));
-                if (int.TryParse(occStr, out var occ)) _edit.occurrences = Mathf.Max(0, occ);
+                var occStr = GUILayout.TextField(edit.occurrences.ToString(), GUILayout.Width(40));
+                if (int.TryParse(occStr, out var occ)) edit.occurrences = Mathf.Max(0, occ);
                 GUILayout.EndHorizontal();
-
                 GUILayout.Space(6);
                 if (GUILayout.Button("Aplicar cambios"))
-                    repo.UpdateRecord(_selected, _edit);
+                    repo.UpdateRecord(selected, edit);
             }
             else
             {
