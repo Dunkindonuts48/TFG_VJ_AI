@@ -6,53 +6,37 @@ namespace BT_Basico
 {
     public class EvaderAI : MonoBehaviour
     {
-        [Header("Refs")]
         [SerializeField] private Transform[] waypoints;
         [SerializeField] private Transform threat;
         [SerializeField] private Material MaterialObjetivo;
         [SerializeField] private Material MaterialDefault;
-
-        [Header("Rangos")]
         [SerializeField] private float detectionRadius = 12f;
         [SerializeField] private float resumeRadius = 16f;
         [SerializeField] private float waypointTol = 0.3f;
-
-        [Header("Velocidades")]
         [SerializeField] private float patrolSpeed = 3.5f;
         [SerializeField] private float evadeSpeed = 6.5f;
-
-        [Header("Evade (muestrado direcciones)")]
         [SerializeField] private float fleeDistance = 8f;
         [SerializeField] private float repathInterval = 0.25f;
         [SerializeField] private int samples = 16;
         [SerializeField] private float maxSpreadAngle = 120f;
-
-        [Header("Runway (huida hacia adelante)")]
         [SerializeField] private float runwayMax = 25f;
         [SerializeField] private float runwayStep = 2f;
         [SerializeField] private float minRunwayAccept = 13f;
-
-        [Header("Stickiness / Anti-U-turn")]
         [SerializeField] private float minStickTime = 0.9f;
         [SerializeField] private float minStickAdvance = 1.5f;
         [SerializeField] private float minScoreImprovement = 3f;
         [SerializeField] private float maxTurnEarlyDeg = 110f;
-
-        [Header("Waypoint Seguro - Anti Ping-Pong")]
         [SerializeField] private float safeWpSwitchCooldown = 1.5f;
         [SerializeField] private float safeWpMinImprovement = 5f;
-        private float lastSafeWpSwitchTime = -999f;
 
+        private float lastSafeWpSwitchTime = -999f;
         private NavMeshAgent agent;
         private int wpIndex = 0;
         private int ultimoResaltado = -1;
-
         private enum Mode { Navigate, Evade }
         private Mode mode = Mode.Navigate;
-
         private float repathTimer = 0f;
         private float stuckTimer = 0f;
-
         private Vector3 currentEvadeTarget;
         private bool hasEvadeTarget = false;
         private float lastTargetChangeTime = -999f;

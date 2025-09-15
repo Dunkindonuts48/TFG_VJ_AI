@@ -6,25 +6,16 @@ namespace TFG.GOAP
 {
     public class GoapHUD : MonoBehaviour
     {
-        [Header("Refs")]
         public GoapAgent agent;
-
-        [Header("Barras")]
         public Slider energySlider;
         public Slider stressSlider;
         public Slider planProgress;
-
-        [Header("Textos")]
         public Text txtCurrentAction;
         public Text txtGoal;
         public Text txtPlanNext;
         public Text energyText;
         public Text stressText;
-
-        [Header("Botones")]
         public Button btnPlan;
-
-        [Header("Opciones")]
         public bool autoscaleEnergyMax = true;
         public float stressMax = 100f;
 
